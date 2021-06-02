@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeetingApi</name>
+    </assembly>
+    <members>
+        <member name="M:MeetingApi.Controllers.MeetingsController.AddMeeting(MeetingApi.Dtos.MeetingDto)">
+            <summary>
+            Add new meeting
+            </summary>
+        </member>
+    </members>
+</doc>

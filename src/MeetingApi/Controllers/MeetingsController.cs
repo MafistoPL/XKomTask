@@ -3,6 +3,7 @@ using MeetingApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.EF.Entities;
 using Persistence.EF.Repositories;
+using System;
 using System.Threading.Tasks;
 
 namespace MeetingApi.Controllers
@@ -20,12 +21,23 @@ namespace MeetingApi.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Add new meeting
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult> AddMeeting(MeetingDto meetingDto)
         {
             var savedMeeting = await _meetingsRepository
                 .AddAsync(_mapper.Map<Meeting>(meetingDto));
             return Ok(savedMeeting);
+        }
+
+        [HttpDelete("{meetingId}")]
+        public async Task<ActionResult> RemoveMeeting(Guid meetingId)
+        {
+            var deletedMeeting = new Meeting { Id = meetingId };
+            await _meetingsRepository.DeleteAsync(deletedMeeting);
+            return NoContent();
         }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using Persistence.EF;
 using Persistence.EF.Entities;
 using Persistence.EF.Repositories;
+using System.IO;
 
 namespace MeetingApi
 {
@@ -35,6 +36,9 @@ namespace MeetingApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MeetingApi", Version = "v1" });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "MeetingApi.xml");
+                c.IncludeXmlComments(filePath);
             });
         }
 
