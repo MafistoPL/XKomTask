@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Persistence.EF;
+using Persistence.EF.Entities;
+using Persistence.EF.Repositories;
 
 namespace MeetingApi
 {
@@ -24,6 +26,11 @@ namespace MeetingApi
             {
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"));
             });
+
+            services.AddScoped<IAsyncRepository<Meeting>, MeetingRepository>();
+
+            services.AddAutoMapper(GetType().Assembly);
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

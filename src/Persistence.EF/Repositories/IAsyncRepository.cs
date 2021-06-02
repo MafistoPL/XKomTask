@@ -6,9 +6,7 @@ namespace Persistence.EF.Repositories
 {
     public interface IAsyncRepository<T> where T : class
     {
-        Task<T> GetByIdAsync(int id);
-
-        Task<T> GetByGuidAsync(Guid guid);
+        Task<T> GetByIdAsync(Guid guid);
 
         Task<IReadOnlyList<T>> GetAllAsync();
 

@@ -10,11 +10,11 @@ namespace Persistence.EF.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        
+
         [Required]
         [StringLength(150)]
         public string Subject { get; set; }
-        
+
         [Required]
         [StringLength(100)]
         public string Place { get; set; }
@@ -24,6 +24,5 @@ namespace Persistence.EF.Entities
 
         [Required]
         public DateTime EndDate { get; set; }
-
     }
 }
