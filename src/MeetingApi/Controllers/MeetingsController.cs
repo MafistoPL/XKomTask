@@ -2,13 +2,12 @@
 using MeetingApi.Dtos;
 using MeetingApi.Dtos.Meeting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Persistence.EF.Entities;
 using Persistence.EF.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NLog;
-using Microsoft.Extensions.Logging;
 
 namespace MeetingApi.Controllers
 {

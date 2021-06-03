@@ -1,3 +1,7 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using MeetingApi.Dtos;
+using MeetingApi.Dtos.Validators;
 using MeetingApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,8 +37,8 @@ namespace MeetingApi
             services.AddScoped<IAsyncRepository<Participant>, ParticipantRepository>();
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddAutoMapper(GetType().Assembly);
-
-            services.AddControllers();
+            services.AddScoped<IValidator<RegisterParticipantDto>, RegisterParticipantDtoValidator>();
+            services.AddControllers().AddFluentValidation();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MeetingApi", Version = "v1" });
