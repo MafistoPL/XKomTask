@@ -7,6 +7,8 @@ using Persistence.EF.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace MeetingApi.Controllers
 {
@@ -16,11 +18,14 @@ namespace MeetingApi.Controllers
     {
         private readonly IAsyncRepository<Meeting> _meetingsRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<MeetingsController> _logger;
 
-        public MeetingsController(IAsyncRepository<Meeting> meetingsRepository, IMapper mapper)
+        public MeetingsController(IAsyncRepository<Meeting> meetingsRepository, IMapper mapper,
+            ILogger<MeetingsController> logger)
         {
             _meetingsRepository = meetingsRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         /// <summary>
@@ -41,8 +46,11 @@ namespace MeetingApi.Controllers
         [HttpDelete("{meetingId}")]
         public async Task<ActionResult> RemoveMeeting(Guid meetingId)
         {
+            _logger.LogWarning($"Meeting with id: {meetingId} DELETE action invoked");
+
             var deletedMeeting = new Meeting { Id = meetingId };
             await _meetingsRepository.DeleteAsync(deletedMeeting);
+
             return NoContent();
         }
 
