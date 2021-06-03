@@ -1,3 +1,4 @@
+using MeetingApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,7 @@ namespace MeetingApi
 
             services.AddScoped<IAsyncRepository<Meeting>, MeetingRepository>();
             services.AddScoped<IAsyncRepository<Participant>, ParticipantRepository>();
-
+            services.AddScoped<ErrorHandlingMiddleware>();
             services.AddAutoMapper(GetType().Assembly);
 
             services.AddControllers();
@@ -51,6 +52,7 @@ namespace MeetingApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MeetingApi v1"));
             }
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 
