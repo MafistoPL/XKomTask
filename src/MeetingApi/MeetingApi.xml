@@ -4,9 +4,24 @@
         <name>MeetingApi</name>
     </assembly>
     <members>
-        <member name="M:MeetingApi.Controllers.MeetingsController.AddMeeting(MeetingApi.Dtos.MeetingDto)">
+        <member name="M:MeetingApi.Controllers.MeetingsController.AddMeeting(MeetingApi.Dtos.CreateMeetingDto)">
             <summary>
             Add new meeting
+            </summary>
+        </member>
+        <member name="M:MeetingApi.Controllers.MeetingsController.RemoveMeeting(System.Guid)">
+            <summary>
+            Delete existing meeting
+            </summary>
+        </member>
+        <member name="M:MeetingApi.Controllers.MeetingsController.GetAllMeetings">
+            <summary>
+            Fetch all meetings
+            </summary>
+        </member>
+        <member name="M:MeetingApi.Controllers.ParticipantController.RegisterParticipant(MeetingApi.Dtos.RegisterParticipantDto)">
+            <summary>
+            Register participant to meeting
             </summary>
         </member>
     </members>

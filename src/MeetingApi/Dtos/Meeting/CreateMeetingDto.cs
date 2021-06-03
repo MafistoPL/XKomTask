@@ -3,12 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeetingApi.Dtos
 {
-    public class MeetingDto
+    public class CreateMeetingDto
     {
         [Required]
+        [MaxLength(150)]
         public string Subject { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string Place { get; set; }
 
         [Required]
