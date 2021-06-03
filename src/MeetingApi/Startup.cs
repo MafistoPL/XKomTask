@@ -29,6 +29,7 @@ namespace MeetingApi
             });
 
             services.AddScoped<IAsyncRepository<Meeting>, MeetingRepository>();
+            services.AddScoped<IAsyncRepository<Participant>, ParticipantRepository>();
 
             services.AddAutoMapper(GetType().Assembly);
 
