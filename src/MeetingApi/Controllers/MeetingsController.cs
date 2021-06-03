@@ -32,6 +32,9 @@ namespace MeetingApi.Controllers
             return Ok(savedMeeting);
         }
 
+        /// <summary>
+        /// Delete existing meeting
+        /// </summary>
         [HttpDelete("{meetingId}")]
         public async Task<ActionResult> RemoveMeeting(Guid meetingId)
         {
