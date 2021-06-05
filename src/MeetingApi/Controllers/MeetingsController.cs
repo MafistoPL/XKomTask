@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MeetingApi.Dtos;
 using MeetingApi.Dtos.Meeting;
+using MeetingApi.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Persistence.EF.Entities;
@@ -47,8 +48,12 @@ namespace MeetingApi.Controllers
         {
             _logger.LogWarning($"Meeting with id: {meetingId} DELETE action invoked");
 
-            var deletedMeeting = new Meeting { Id = meetingId };
-            await _meetingsRepository.DeleteAsync(deletedMeeting);
+            var meetingToDelete = await _meetingsRepository.GetByIdAsync(meetingId);
+            if (meetingToDelete is null)
+            {
+                throw new NotFoundException($"Meeting with given id='{meetingId}' does not exist");
+            }
+            await _meetingsRepository.DeleteAsync(meetingToDelete);
 
             return NoContent();
         }
