@@ -2,7 +2,7 @@
 
 namespace Persistence.EF.Repositories
 {
-    internal interface IMeetingRepository : IAsyncRepository<Meeting>
+    public interface IMeetingRepository : IAsyncRepository<Meeting>
     {
     }
 }

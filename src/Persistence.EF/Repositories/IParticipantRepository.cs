@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.EF.Repositories
 {
-    internal interface IParticipantRepositiory : IAsyncRepository<Participant>
+    public interface IParticipantRepository : IAsyncRepository<Participant>
     {
     }
 }

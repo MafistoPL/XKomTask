@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using MeetingApi.Dtos;
 using MeetingApi.Dtos.Validators;
 using MeetingApi.Middleware;
+using MeetingApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,7 @@ namespace MeetingApi
 
             services.AddScoped<IAsyncRepository<Meeting>, MeetingRepository>();
             services.AddScoped<IAsyncRepository<Participant>, ParticipantRepository>();
+            services.AddScoped<IMeetingService, MeetingService>();
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddAutoMapper(GetType().Assembly);
             services.AddScoped<IValidator<RegisterParticipantDto>, RegisterParticipantDtoValidator>();

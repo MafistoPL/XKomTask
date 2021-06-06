@@ -2,6 +2,7 @@
 using MeetingApi.Dtos;
 using MeetingApi.Dtos.Meeting;
 using MeetingApi.Exceptions;
+using MeetingApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Persistence.EF.Entities;
@@ -19,13 +20,15 @@ namespace MeetingApi.Controllers
         private readonly IAsyncRepository<Meeting> _meetingsRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<MeetingsController> _logger;
+        private readonly IMeetingService _meetingService;
 
         public MeetingsController(IAsyncRepository<Meeting> meetingsRepository, IMapper mapper,
-            ILogger<MeetingsController> logger)
+            ILogger<MeetingsController> logger, IMeetingService meetingService)
         {
             _meetingsRepository = meetingsRepository;
             _mapper = mapper;
             _logger = logger;
+            _meetingService = meetingService;
         }
 
         /// <summary>
@@ -48,12 +51,7 @@ namespace MeetingApi.Controllers
         {
             _logger.LogWarning($"Meeting with id: {meetingId} DELETE action invoked");
 
-            var meetingToDelete = await _meetingsRepository.GetByIdAsync(meetingId);
-            if (meetingToDelete is null)
-            {
-                throw new NotFoundException($"Meeting with given id='{meetingId}' does not exist");
-            }
-            await _meetingsRepository.DeleteAsync(meetingToDelete);
+            await _meetingService.RemoveMeetingAsync(meetingId);
 
             return NoContent();
         }
