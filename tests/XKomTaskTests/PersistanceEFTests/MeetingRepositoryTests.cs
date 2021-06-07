@@ -35,7 +35,7 @@ namespace XKomTaskTests
         }
 
         [Fact]
-        public async Task GetAllAsync_Should_RerutnAllObject_When_Invoked()
+        public async Task GetAllAsync_Should_ReturnAllObject_When_Invoked()
         {
             var meetingRepository = RepositoryMocks.GetMeetingRepository();
 
@@ -105,7 +105,7 @@ namespace XKomTaskTests
         [Fact]
         public async Task DeleteAsync_Should_CascadeDeleteItems_When_ExistingObjectIsPassed()
         {
-            using var dbContext = RepositoryMocks.GetApplicationContext(databaseName:
+            await using var dbContext = RepositoryMocks.GetApplicationContext(databaseName:
                 "DeleteAsync_Should_CascadeDeleteItems_When_ExistingObjectIsPassed");
 
             var meetingRepository = new MeetingRepository(dbContext);

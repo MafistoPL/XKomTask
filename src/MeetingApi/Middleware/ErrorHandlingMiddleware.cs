@@ -1,6 +1,7 @@
 ﻿using MeetingApi.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -15,6 +16,13 @@ namespace MeetingApi.Middleware
             _logger = logger;
         }
 
+        private async Task WriteErrorMessage(string message, HttpContext context)
+        {
+            context.Response.ContentType = "application/json";
+            var error = JsonConvert.SerializeObject(new { Error = message });
+            await context.Response.WriteAsync(error);
+        }
+
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
@@ -24,19 +32,19 @@ namespace MeetingApi.Middleware
             catch (BadRequestException badRequestException)
             {
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                await context.Response.WriteAsync(badRequestException.Message);
+                await WriteErrorMessage(badRequestException.Message, context);
             }
             catch (NotFoundException notFoundException)
             {
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
-                await context.Response.WriteAsync(notFoundException.Message);
+                await WriteErrorMessage(notFoundException.Message, context);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, e.Message);
 
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                await context.Response.WriteAsync("Something went wrong");
+                await WriteErrorMessage("Something went wrong", context);
             }
         }
     }
