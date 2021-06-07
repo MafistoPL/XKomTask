@@ -37,7 +37,7 @@ namespace MeetingApi.Services
             catch(DbUpdateException)
             {
                 throw new BadRequestException("Provided email is already assigned to given meeting");
-            }            
+            }
         }
     }
 }

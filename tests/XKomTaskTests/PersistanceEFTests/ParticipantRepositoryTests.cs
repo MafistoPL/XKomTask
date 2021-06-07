@@ -10,7 +10,7 @@ namespace XKomTaskTests
     {
         // MethodUnderTest_SHOULD_ExpectedBehavior_WHEN_StateUnderTest
         [Fact]
-        public async Task Add_Should_ReturnObject_When_IdIsCorrect()
+        public async Task GetByIdAsync_Should_ReturnObject_When_IdIsCorrect()
         {
             var participantRepository = RepositoryMocks.GetParticipantRepository();
 
@@ -23,7 +23,7 @@ namespace XKomTaskTests
         }
 
         [Fact]
-        public async Task Add_Should_ReturnNull_When_IdIsNotCorrect()
+        public async Task GetByIdAsync_Should_ReturnNull_When_IdIsNotCorrect()
         {
             var participantRepository = RepositoryMocks.GetParticipantRepository();
 

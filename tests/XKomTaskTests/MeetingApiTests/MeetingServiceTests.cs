@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using XKomTaskTests.Mocks;
 using Xunit;
 
-namespace XKomTaskTests
+namespace XKomTaskTests.MeetingApiTests
 {
     public class MeetingServiceTests
     {
@@ -47,6 +47,7 @@ namespace XKomTaskTests
 
             var exception = await Record.ExceptionAsync(async () => await task);
 
+            Assert.NotNull(exception);
             Assert.Equal(
                 $"Meeting with given id='{guid.ToString()}' does not exist",
                 exception.Message
