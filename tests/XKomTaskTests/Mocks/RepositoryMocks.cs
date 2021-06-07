@@ -6,8 +6,6 @@ using Persistence.EF.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks; 
 
 namespace XKomTaskTests.Mocks
 {

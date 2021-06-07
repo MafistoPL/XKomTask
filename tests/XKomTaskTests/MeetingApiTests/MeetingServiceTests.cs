@@ -1,11 +1,6 @@
-﻿using MeetingApi.Exceptions;
-using MeetingApi.Services;
-using Moq;
+﻿using MeetingApi.Services;
 using Persistence.EF.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using XKomTaskTests.Mocks;
 using Xunit;
