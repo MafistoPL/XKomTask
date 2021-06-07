@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MeetingApi.Dtos;
 using MeetingApi.Dtos.Meeting;
-using MeetingApi.Exceptions;
 using MeetingApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

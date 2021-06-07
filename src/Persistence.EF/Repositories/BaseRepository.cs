@@ -14,7 +14,6 @@ namespace Persistence.EF.Repositories
             _dbContext = dbContext;
         }
 
-
         public async Task<T> AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);

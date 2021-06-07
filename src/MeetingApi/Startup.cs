@@ -40,6 +40,7 @@ namespace MeetingApi
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddAutoMapper(GetType().Assembly);
             services.AddScoped<IValidator<RegisterParticipantDto>, RegisterParticipantDtoValidator>();
+            services.AddScoped<IValidator<CreateMeetingDto>, CreateMeetingDtoValidator>();
             services.AddControllers().AddFluentValidation();
             services.AddSwaggerGen(c =>
             {
