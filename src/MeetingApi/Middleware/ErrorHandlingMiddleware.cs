@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MeetingApi.Middleware
@@ -22,6 +20,11 @@ namespace MeetingApi.Middleware
             try
             {
                 await next.Invoke(context);
+            }
+            catch (BadRequestException badRequestException)
+            {
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                await context.Response.WriteAsync(badRequestException.Message);
             }
             catch (NotFoundException notFoundException)
             {

@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using MeetingApi.Dtos;
-using MeetingApi.Dtos.Participant;
+﻿using MeetingApi.Dtos;
+using MeetingApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using Persistence.EF.Entities;
-using Persistence.EF.Repositories;
 using System.Threading.Tasks;
 
 namespace MeetingApi.Controllers
@@ -12,13 +9,11 @@ namespace MeetingApi.Controllers
     [ApiController]
     public class ParticipantController : ControllerBase
     {
-        private readonly IAsyncRepository<Participant> _participantRepository;
-        private readonly IMapper _mapper;
+        private readonly IParticipantService _participantService;
 
-        public ParticipantController(IAsyncRepository<Participant> participantRepository, IMapper mapper)
+        public ParticipantController(IParticipantService participantService)
         {
-            _participantRepository = participantRepository;
-            _mapper = mapper;
+            _participantService = participantService;
         }
 
         /// <summary>
@@ -26,11 +21,8 @@ namespace MeetingApi.Controllers
         /// </summary>
         [HttpPost]
         public async Task<ActionResult> RegisterParticipant(RegisterParticipantDto participantDto)
-        {
-            var registeredParticipant = await _participantRepository
-                .AddAsync(_mapper.Map<Participant>(participantDto));
-
-            return Ok(_mapper.Map<ParticipantDto>(registeredParticipant));
+        {   
+            return Ok(await _participantService.RegisterParticipant(participantDto));
         }
     }
 }

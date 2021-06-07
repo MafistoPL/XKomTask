@@ -15,6 +15,13 @@ namespace Persistence.EF
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Participant> Participants { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Participant>()
+                .HasIndex(participant => new { participant.Email, participant.MeetingId })
+                .IsUnique();
+        }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())

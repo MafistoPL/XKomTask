@@ -37,6 +37,7 @@ namespace MeetingApi
             services.AddScoped<IAsyncRepository<Meeting>, MeetingRepository>();
             services.AddScoped<IAsyncRepository<Participant>, ParticipantRepository>();
             services.AddScoped<IMeetingService, MeetingService>();
+            services.AddScoped<IParticipantService, ParticipantService>();
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddAutoMapper(GetType().Assembly);
             services.AddScoped<IValidator<RegisterParticipantDto>, RegisterParticipantDtoValidator>();
