@@ -1,5 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using MeetingApi.Config;
 using MeetingApi.Dtos;
 using MeetingApi.Dtos.Validators;
 using MeetingApi.Middleware;
@@ -29,12 +30,19 @@ namespace MeetingApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var meetingValidationConfig = new MeetingValidationConfig();
+
+            Configuration.GetSection("MeetingValidationConfig").Bind(meetingValidationConfig);
+
+            services.AddSingleton(meetingValidationConfig);
+
             services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"));
             });
 
             services.AddScoped<IAsyncRepository<Meeting>, MeetingRepository>();
+            services.AddScoped<IMeetingRepository, MeetingRepository>();
             services.AddScoped<IAsyncRepository<Participant>, ParticipantRepository>();
             services.AddScoped<IMeetingService, MeetingService>();
             services.AddScoped<IParticipantService, ParticipantService>();

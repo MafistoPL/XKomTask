@@ -163,7 +163,7 @@ namespace XKomTaskTests.Mocks
                 {
                     Id = Guid.Parse("506F7A64-7261-7769-616D-20584B6F6D21"),
                     CreatedDate = DateTime.ParseExact("2021-07-01 13:37", DateFormat, null),
-                    Email = "EasterEgg@x-kom.pl",
+                    Email = "EasterEgg@ascii.pl",
                     Name = "Easter Egg",
                     LastModifiedDate = null,
                     MeetingId = meetings[1].Id,

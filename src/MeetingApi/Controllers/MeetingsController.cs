@@ -16,12 +16,12 @@ namespace MeetingApi.Controllers
     [ApiController]
     public class MeetingsController : ControllerBase
     {
-        private readonly IAsyncRepository<Meeting> _meetingsRepository;
+        private readonly IMeetingRepository _meetingsRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<MeetingsController> _logger;
         private readonly IMeetingService _meetingService;
 
-        public MeetingsController(IAsyncRepository<Meeting> meetingsRepository, IMapper mapper,
+        public MeetingsController(IMeetingRepository meetingsRepository, IMapper mapper,
             ILogger<MeetingsController> logger, IMeetingService meetingService)
         {
             _meetingsRepository = meetingsRepository;
@@ -61,7 +61,7 @@ namespace MeetingApi.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAllMeetings()
         {
-            var allMeetings = await _meetingsRepository.GetAllAsync();
+            var allMeetings = await _meetingsRepository.GetAllWithParticipantsAsync();
 
             return Ok(_mapper.Map<List<MeetingDto>>(allMeetings));
         }

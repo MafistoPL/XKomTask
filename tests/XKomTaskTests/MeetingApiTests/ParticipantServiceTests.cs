@@ -45,7 +45,6 @@ namespace XKomTaskTests.MeetingApiTests
             var participantsCountsAfterAdd = (await participantRepository.GetAllAsync()).Count;
 
             Assert.True(participantsCountsBeforeAdd + 1 == participantsCountsAfterAdd);
-            Assert.Equal(registerParticipantDto.MeetingId, result.MeetingId);
         }
     }
 }
